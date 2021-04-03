@@ -1,0 +1,30 @@
+name: 'Godot Asset Lib'
+description: 'Action to manage assets in the Godot Asset Lib'
+inputs:
+  action:
+    description: 'Action to carry out. Currently supported: addEdit'
+    required: true
+    default: 'addEdit'
+  username:
+    description: 'Godot asset lib username'
+    required: true
+  password:
+    description: 'Godot asset lib password'
+    required: true
+  assetId:
+    description: 'ID of the asset in the asset store'
+    required: true
+  assetTemplate:
+    description: 'Path to asset template file'
+    default: '.asset-template.json.hb'
+    required: true
+  baseUrl:
+    description: 'Godot asset lib base url'
+    required: true
+    default: 'https://godotengine.org/asset-library/api'
+outputs:
+  id:
+    description: 'The id of the asset edit'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
