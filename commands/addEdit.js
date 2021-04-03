@@ -19,7 +19,8 @@ export default class extends Command {
         const template = Handlebars.compile(templateContent)
         const assetEdit = JSON.parse(template(github.context.payload))
         assetEdit.token = token
-        const res = await superagent(`${baseUrl}/asset/${assetId}`)
+        const res = await superagent.post(`${baseUrl}/asset/${assetId}`)
+            .send(assetEdit)
         core.setOutput('id', res.id)
     }
 }
