@@ -1,5 +1,9 @@
 name: 'Godot Asset Lib'
 description: 'Action to manage assets in the Godot Asset Lib'
+branding:
+  icon: 'archive'
+  color: 'purple'
+author: 'Deep Entertainment'
 inputs:
   action:
     description: 'Action to carry out. Currently supported: addEdit'
