@@ -75,13 +75,12 @@ with:
   "description": "Lorem ipsum…",
   "category_id": "1",
   "godot_version": "2.1",
-  "version_string": "alpha",
+  "version_string": "{{ release.tag_name }}",
   "cost": "GPLv3",
   "download_provider": "GitHub",
-  "download_commit": "master",
+  "download_commit": "{{ release.tag_name }}",
   "browse_url": "{{ repository.html_url }}",
   "issues_url": "{{ repository.html_url }}/issues",
-  "icon_url": "https://raw.github.com/...",
-  "download_url": "{{ release.zipball_url }}",
+  "icon_url": "https://raw.github.com/..."
 }
 ```
