@@ -21,12 +21,12 @@ module.exports = class extends Command {
     }
     console.log(`Providing context: ${JSON.stringify(context)}`)
     const assetEdit = JSON.parse(template(context))
-    assetEdit.token = this._token
     console.log(
       `Sending request: ${JSON.stringify(
         assetEdit
-      )} to url ${baseUrl}/asset/${assetId}`
+      )} (token redacted) to url ${baseUrl}/asset/${assetId}`
     )
+    assetEdit.token = this._token
     const res = await axios.post(`${baseUrl}/asset/${assetId}`, assetEdit)
     console.log(`Request returned id ${res.data.id}`)
     core.setOutput('id', res.data.id)

@@ -30,7 +30,7 @@ const axios = require('axios').default
     await command.do()
 
     console.log('Logging out of asset lib')
-    await axis.post(`${baseUrl}/logout`, {
+    await axios.post(`${baseUrl}/logout`, {
       token: token,
     })
   } catch (error) {
