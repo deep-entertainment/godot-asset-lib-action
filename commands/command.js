@@ -1,4 +1,4 @@
-export class Command {
+module.exports = class {
   constructor(token) {
     this._token = token
   }

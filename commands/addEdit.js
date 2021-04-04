@@ -1,11 +1,10 @@
-import { Command } from "./command"
-
+const Command = require("./command")
 const core = require("@actions/core")
 const github = require("@actions/github")
 const fs = require("fs").promises
 const axios = require("axios").default
 
-export default class extends Command {
+module.exports = class extends Command {
   async do() {
     const templateContent = await fs.readFile(core.getInput("assetTemplate"), {
       encoding: "utf-8",
