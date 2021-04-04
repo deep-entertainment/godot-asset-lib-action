@@ -2,6 +2,51 @@ module.exports =
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ 7668:
+/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
+
+"use strict";
+// ESM COMPAT FLAG
+__nccwpck_require__.r(__webpack_exports__);
+
+// EXPORTS
+__nccwpck_require__.d(__webpack_exports__, {
+  "default": () => /* binding */ addEdit
+});
+
+// CONCATENATED MODULE: ./commands/command.js
+class Command {
+  constructor(token) {
+    this._token = token
+  }
+}
+
+// CONCATENATED MODULE: ./commands/addEdit.js
+
+
+const core = __nccwpck_require__(2186)
+const github = __nccwpck_require__(5438)
+const fs = __nccwpck_require__(5747).promises
+const axios = __nccwpck_require__(6545).default
+
+/* harmony default export */ const addEdit = (class extends Command {
+  async do() {
+    const templateContent = await fs.readFile(core.getInput("assetTemplate"), {
+      encoding: "utf-8",
+    })
+    const baseUrl = core.getInput("baseUrl")
+    const assetId = core.getInput("assetId")
+    const template = Handlebars.compile(templateContent)
+    const assetEdit = JSON.parse(template(github.context.payload))
+    assetEdit.token = token
+    const res = await axios.post(`${baseUrl}/asset/${assetId}`, assetEdit)
+    core.setOutput("id", res.data.id)
+  }
+});
+
+
+/***/ }),
+
 /***/ 2932:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -15,7 +60,7 @@ const axios = __nccwpck_require__(6545).default
     let commandClass
     switch (action) {
       case "addEdit":
-        commandClass = __nccwpck_require__(2800)
+        commandClass = __nccwpck_require__(7668)
         break
       default:
         throw new Error(`Unknown action ${action}`)
@@ -8546,14 +8591,6 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
-/***/ 2800:
-/***/ ((module) => {
-
-module.exports = eval("require")("commands/addEdit");
-
-
-/***/ }),
-
 /***/ 9975:
 /***/ ((module) => {
 
@@ -8714,6 +8751,34 @@ module.exports = require("zlib");;
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__nccwpck_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__nccwpck_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__nccwpck_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/compat */
 /******/ 	
 /******/ 	__nccwpck_require__.ab = __dirname + "/";/************************************************************************/

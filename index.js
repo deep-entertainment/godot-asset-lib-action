@@ -8,7 +8,7 @@ const axios = require("axios").default
     let commandClass
     switch (action) {
       case "addEdit":
-        commandClass = require("commands/addEdit")
+        commandClass = require("./commands/addEdit")
         break
       default:
         throw new Error(`Unknown action ${action}`)
