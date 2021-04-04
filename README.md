@@ -58,13 +58,24 @@ ID of the asset in the asset store.
 
 ```yaml
 name: "Push to asset lib"
-on: release
+on: 
+  release:
+    types:
+      - published
 
-uses: actions/godot-asset-lib-action@v0.1.0
-with:
-  username: example
-  password: ${{ secrets.ASSET_STORE_PASSWORD }}
-  assetId: 12345
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    name: Publish new version to asset lib
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Godot Asset Lib
+        uses: actions/godot-asset-lib-action@v0.3.0
+        with:
+          username: example
+          password: ${{ secrets.ASSET_STORE_PASSWORD }}
+          assetId: 12345
 ```
 
 ## Example template
@@ -75,12 +86,12 @@ with:
   "description": "Lorem ipsum…",
   "category_id": "1",
   "godot_version": "2.1",
-  "version_string": "{{ release.tag_name }}",
+  "version_string": "{{ context.release.tag_name }}",
   "cost": "GPLv3",
   "download_provider": "GitHub",
-  "download_commit": "{{ release.tag_name }}",
-  "browse_url": "{{ repository.html_url }}",
-  "issues_url": "{{ repository.html_url }}/issues",
-  "icon_url": "https://raw.github.com/..."
+  "download_commit": "{{ env.GITHUB_SHA }}",
+  "browse_url": "{{ context.repository.html_url }}",
+  "issues_url": "{{ context.repository.html_url }}/issues",
+  "icon_url": "https://raw.githubusercontent.com/..."
 }
 ```
