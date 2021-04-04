@@ -15,6 +15,7 @@ module.exports = class extends Command {
 
     console.log('Compiling asset edit template for request')
     const template = handlebars.compile(templateContent)
+    console.log(`Providing context: ${JSON.stringify(github.context.payload)}`)
     const assetEdit = JSON.parse(template(github.context.payload))
     assetEdit.token = this._token
     console.log(
