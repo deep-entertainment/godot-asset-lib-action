@@ -14,7 +14,7 @@ module.exports = class extends Command {
     const assetId = core.getInput("assetId")
     const template = handlebars.compile(templateContent)
     const assetEdit = JSON.parse(template(github.context.payload))
-    assetEdit.token = token
+    assetEdit.token = this._token
     const res = await axios.post(`${baseUrl}/asset/${assetId}`, assetEdit)
     core.setOutput("id", res.data.id)
   }
