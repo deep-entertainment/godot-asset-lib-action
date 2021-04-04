@@ -7,7 +7,9 @@ module.exports =
 
 const core = __nccwpck_require__(2186)
 const github = __nccwpck_require__(5438)
-const axios = __nccwpck_require__(6545).default(async () => {
+const axios = __nccwpck_require__(6545).default
+
+;(async () => {
   try {
     const action = core.getInput("action")
     let commandClass
