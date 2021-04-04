@@ -28,12 +28,12 @@ module.exports = class extends Command {
     }
     console.log(`Providing context: ${JSON.stringify(context)}`)
     const assetEdit = JSON.parse(template(context))
-    assetEdit.token = this._token
     console.log(
       `Sending request: ${JSON.stringify(
         assetEdit
-      )} to url ${baseUrl}/asset/${assetId}`
+      )} (token redacted) to url ${baseUrl}/asset/${assetId}`
     )
+    assetEdit.token = this._token
     const res = await axios.post(`${baseUrl}/asset/${assetId}`, assetEdit)
     console.log(`Request returned id ${res.data.id}`)
     core.setOutput('id', res.data.id)
@@ -90,7 +90,7 @@ const axios = __nccwpck_require__(6545).default
     await command.do()
 
     console.log('Logging out of asset lib')
-    await axis.post(`${baseUrl}/logout`, {
+    await axios.post(`${baseUrl}/logout`, {
       token: token,
     })
   } catch (error) {
