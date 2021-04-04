@@ -1,6 +1,8 @@
 const core = require("@actions/core")
 const github = require("@actions/github")
-const axios = require("axios").default(async () => {
+const axios = require("axios").default
+
+;(async () => {
   try {
     const action = core.getInput("action")
     let commandClass
