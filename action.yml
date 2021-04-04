@@ -31,4 +31,4 @@ outputs:
     description: 'The id of the asset edit'
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'dist/index.js'
