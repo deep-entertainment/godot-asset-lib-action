@@ -14,16 +14,20 @@ const handlebars = __nccwpck_require__(7492)
 
 module.exports = class extends Command {
   async do() {
-    const templateContent = await fs.readFile(core.getInput("assetTemplate"), {
-      encoding: "utf-8",
+    const templateContent = await fs.readFile(core.getInput('assetTemplate'), {
+      encoding: 'utf-8',
     })
-    const baseUrl = core.getInput("baseUrl")
-    const assetId = core.getInput("assetId")
+    const baseUrl = core.getInput('baseUrl')
+    const assetId = core.getInput('assetId')
+
+    console.log('Compiling asset edit template for request')
     const template = handlebars.compile(templateContent)
     const assetEdit = JSON.parse(template(github.context.payload))
     assetEdit.token = this._token
+    console.log(`Sending request: ${JSON.stringify(assetEdit)}`)
     const res = await axios.post(`${baseUrl}/asset/${assetId}`, assetEdit)
-    core.setOutput("id", res.data.id)
+    console.log(`Request returned id ${res.data.id}`)
+    core.setOutput('id', res.data.id)
   }
 }
 
@@ -51,18 +55,18 @@ const axios = __nccwpck_require__(6545).default
 
 ;(async () => {
   try {
-    const action = core.getInput("action")
+    const action = core.getInput('action')
     let commandClass
     switch (action) {
-      case "addEdit":
+      case 'addEdit':
         commandClass = __nccwpck_require__(8276)
         break
       default:
         throw new Error(`Unknown action ${action}`)
     }
-    const baseUrl = core.getInput("baseUrl")
-    const username = core.getInput("username")
-    const password = core.getInput("password")
+    const baseUrl = core.getInput('baseUrl')
+    const username = core.getInput('username')
+    const password = core.getInput('password')
     console.log(`Logging in ${username}`)
 
     const res = await axios.post(`${baseUrl}/login`, {
@@ -71,8 +75,12 @@ const axios = __nccwpck_require__(6545).default
     })
 
     const token = res.data.token
+
+    console.log(`Starting command for action ${action}`)
     const command = new commandClass(token)
     await command.do()
+
+    console.log('Logging out of asset lib')
     await axis.post(`${baseUrl}/logout`, {
       token: token,
     })
