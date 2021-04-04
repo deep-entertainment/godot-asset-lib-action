@@ -10,7 +10,8 @@ This github action manages assets in the
 **Required** The action to carry out. Currently, these actions
 are provided:
 
-* addEdit: Add an asset edit. Requires the assetId input
+* addEdit: Add an asset edit. Requires the assetId input. Expects that you 
+  have created the asset previously with all the basic information.
 
 *Default*: addEdit
 
