@@ -15,6 +15,7 @@ module.exports = class extends Command {
     const template = handlebars.compile(templateContent)
     const assetEdit = JSON.parse(template(github.context.payload))
     assetEdit.token = this._token
+    console.log(`Sending request: ${JSON.stringify(assetEdit)}`)
     const res = await axios.post(`${baseUrl}/asset/${assetId}`, assetEdit)
     core.setOutput("id", res.data.id)
   }
