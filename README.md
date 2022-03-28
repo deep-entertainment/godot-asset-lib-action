@@ -49,6 +49,12 @@ The token will be injected by the action.
 
 *Default*: https://godotengine.org/asset-library/api
 
+### `approveDirectly`
+
+If your Godot asset library user has moderation features, you can directly approve the changes.
+
+*Default*: false
+
 ## Outputs
 
 ### `id`

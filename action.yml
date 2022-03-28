@@ -26,6 +26,10 @@ inputs:
     description: 'Godot asset lib base url'
     required: true
     default: 'https://godotengine.org/asset-library/api'
+  approveDirectly:
+    description: "If your Godot asset library user has moderation features, you can directly approve the changes."
+    required: true
+    default: "false"
 outputs:
   id:
     description: 'The id of the asset edit'
