@@ -43,17 +43,14 @@ module.exports = class extends Command {
       const resReview = await axios.post(
         `${baseUrl}/asset/edit/${assetEditId}/review`,
         {
-          token: this._token
+          token: this._token,
         }
       )
-      const assetReviewId = resReview.data.id
-      console.log(`Request returned review id ${assetReviewId}`)
-
       console.log('Accepting the edit')
       const resAccept = await axios.post(
-        `${baseUrl}/asset/edit/${assetReviewId}/accept`,
+        `${baseUrl}/asset/edit/${assetEditId}/accept`,
         {
-          token: this._token
+          token: this._token,
         }
       )
     }
