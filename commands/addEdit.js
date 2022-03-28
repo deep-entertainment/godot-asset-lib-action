@@ -32,6 +32,7 @@ module.exports = class extends Command {
     console.log(`Request returned edit id ${assetEditId}`)
     core.setOutput('id', assetEditId)
 
+    console.log(core.getInput('approveDirectly'))
     if (core.getInput('approveDirectly') === 'true') {
       console.log('Putting the edit in review')
       const resReview = await axios.post(
