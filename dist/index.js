@@ -35,8 +35,30 @@ module.exports = class extends Command {
     )
     assetEdit.token = this._token
     const res = await axios.post(`${baseUrl}/asset/${assetId}`, assetEdit)
-    console.log(`Request returned id ${res.data.id}`)
-    core.setOutput('id', res.data.id)
+    const assetEditId = res.data.id
+    console.log(`Request returned edit id ${assetEditId}`)
+
+    if (core.getInput('approveDirectly') === 'true') {
+      console.log('Putting the edit in review')
+      const resReview = await axios.post(
+        `${baseUrl}/asset/edit/${assetEditId}/review`,
+        {
+          token: this._token
+        }
+      )
+      const assetReviewId = resReview.data.id
+      console.log(`Request returned review id ${assetReviewId}`)
+
+      console.log('Accepting the edit')
+      const resAccept = await axios.post(
+        `${baseUrl}/asset/edit/${assetReviewId}/accept`,
+        {
+          token: this._token
+        }
+      )
+    }
+
+    core.setOutput('id', assetEditId)
   }
 }
 
