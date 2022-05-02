@@ -78,7 +78,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Godot Asset Lib
-        uses: actions/godot-asset-lib-action@v0.3.0
+        uses: deep-entertainment/godot-asset-lib-action@v0.4.0
         with:
           username: example
           password: ${{ secrets.ASSET_STORE_PASSWORD }}
