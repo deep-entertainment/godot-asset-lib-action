@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compile": "ncc build index.js --license licenses.txt"
+    "compile": "ncc build index.js --license licenses.txt",
+    "format": "prettier --write index.js commands/*.js"
   },
   "repository": {
     "type": "git",
