@@ -34,6 +34,10 @@ const axios = require('axios').default
       token: token,
     })
   } catch (error) {
-    core.setFailed(error.message)
+    if (error.isAxiosError) {
+      core.setFailed(`${error.message}: ${error.response.data.error}`)
+    } else {
+      core.setFailed(error.message)
+    }
   }
 })()
