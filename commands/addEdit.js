@@ -23,8 +23,8 @@ module.exports = class extends Command {
     const assetEdit = JSON.parse(template(context))
     console.log(
       `Sending request: ${JSON.stringify(
-        assetEdit
-      )} (token redacted) to url ${baseUrl}/asset/${assetId}`
+        assetEdit,
+      )} (token redacted) to url ${baseUrl}/asset/${assetId}`,
     )
     assetEdit.token = this._token
     const res = await axios.post(`${baseUrl}/asset/${assetId}`, assetEdit)
@@ -37,14 +37,14 @@ module.exports = class extends Command {
         `${baseUrl}/asset/edit/${assetEditId}/review`,
         {
           token: this._token,
-        }
+        },
       )
       console.log('Accepting the edit')
       const resAccept = await axios.post(
         `${baseUrl}/asset/edit/${assetEditId}/accept`,
         {
           token: this._token,
-        }
+        },
       )
     }
 
