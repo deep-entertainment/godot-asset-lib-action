@@ -6,8 +6,13 @@ const axios = require('axios').default
 const handlebars = require('handlebars')
 
 module.exports = class extends Command {
+  constructor(token, assetTemplatePath) {
+    super(token)
+    this._assetTemplatePath = assetTemplatePath
+  }
+
   async do() {
-    const templateContent = await fs.readFile(core.getInput('assetTemplate'), {
+    const templateContent = await fs.readFile(this._assetTemplatePath, {
       encoding: 'utf-8',
     })
     const baseUrl = core.getInput('baseUrl')

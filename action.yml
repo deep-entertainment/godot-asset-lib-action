@@ -30,9 +30,14 @@ inputs:
     description: "If your Godot asset library user has moderation features, you can directly approve the changes."
     required: true
     default: "false"
+  directory:
+    description: 'The directory to run the action in'
+    required: false
+    default: '.'
 outputs:
   id:
     description: 'The id of the asset edit'
 runs:
   using: 'node20'
   main: 'dist/index.js'
+  working-directory: ${{ inputs.directory }}
